@@ -2,46 +2,120 @@
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# Introduction
 
-Let's discover **Docusaurus in less than 5 minutes**.
+Arthas-UI is an IDEA plugin that allows you to Attach to the JVM and execute commands directly from IDEA.
 
-## Getting Started
+Features.
 
-Get started by **creating a new site**.
+- 📖: Support for custom Ognl scripts to filter the JVM, no longer need to find the PID yourself!
+- 📦: Automatically copy Jdk and Arthas to containers.
+- 🖊: The result of each command will be recorded separately, support clear screen, view history
+- 🔎: Support auto-completion and syntax checking of Arthas commands ( *unstable, still working on it* )
+- 💡: support clicking Arthas output to jump to the corresponding code.
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+## Quick start
 
-### What you'll need
+### Installation
 
-- [Node.js](https://nodejs.org/en/download/) version 18.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+<iframe width="245px" height="48px" src="https://plugins.jetbrains.com/embeddable/install/26846"></iframe>
 
-## Generate a new site
+### Setup
 
-Generate a new Docusaurus site using the **classic template**.
+First you need to create a host: `Settings
 
-The classic template will automatically be added to your project after you run the command:
+- Open `Settings` -> `Tools` -> `Arthas UI` and create a host by clicking the `+` sign in the `Host Machines` list:
 
-```bash
-npm init docusaurus@latest my-website classic
-```
+![create-hostmachine](/img/intro/create-hostmachine.png)
 
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
+Clicking on this will bring up another configuration dialog:
 
-The command also installs all necessary dependencies you need to run Docusaurus.
+![hostmachine-config](/img/intro/hostmachine-config.png)
 
-## Start your site
+Here, we select, `Connect type` as `Local` and turn on the `Local` option in `Provider Config`, then provide the relevant path parameters.
 
-Run the development server:
+---
 
-```bash
-cd my-website
-npm run start
-```
+Two important properties in a host: `Connect Config` and `Provider Config`, they have a `1:n` relationship, i.e. one `Connect Config` can correspond to more than one `Provider Config`.
 
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
+![hostmachine-relation](/img/intro/hostmachine-relation.png)
 
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
+- `Connect Config`: determines how you connect to the corresponding host.
+- `Provider Config`: determines where on the host you search for JVMs.
 
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+:::tip
+
+You can theoretically use any version of Arthas and Jdk, just make sure they are compatible with each other!
+
+:::
+
+### Connecting to the JVM
+
+Once added, click on the `Arhtas` icon on the right side of the toolbar to expand our core component:
+
+![toolwindow](/img/intro/toolwindow.png)
+
+**Double-click** on the `Local JVM` or **click on any node and then click on the Refresh button in the upper toolbar** to list all the current local JVMs.
+Let's use the official Arthas `math-game.jar` as an example. In Arthas Home, run `math-game` with `java -jar math-game.jar`.
+
+After launching `math-game`, click the Refresh button to refresh all the JVMs, and then find `math-game.jar` (`6608 in the image above . \math-game.jar`), double-click it.
+
+### Execute the command
+
+After double-clicking, a file will open where you can directly type in Arthas's commands: !
+
+![queryconsole](/img/intro/query_console.png)
+
+A couple of things are worth noting:
+
+- Every command needs to end in `;`.
+- We provide syntax checking so that if there is a problem with a command, the IDE will give you an error.
+- Even if the IDE gives you an error, you can still execute the command. We don't have any restrictions on the actual execution, even if the command is indeed wrong!
+
+:::note
+
+Why semicolon endings?
+
+1. to make the separation between commands more obvious
+2. it's simple to implement and doesn't require complex syntax parsing
+3. to avoid ambiguity: for example, the `sm` command can optionally provide a method name, so for the command `sm MyClass echo -d`, what is it?
+Is it a `sm` command or a `sm` command plus a `echo` command?
+
+:::
+
+**Select the command you want to execute and click the green button Run button in the upper left corner to execute it**. After clicking on it, it will start to create a connection and Attach to the JVM to execute your command.
+
+When you select a command and want to execute it, we will get the string you selected and then.
+
+1. remove the spaces to the left and right of the command
+2. replace all newlines with spaces
+3. remove the semicolon at the end of the command (if any)
+4. execute the command
+
+**That means you can split a command into multiple lines and then execute it.**
+
+After the command is run, a terminal will be opened, showing the result of the run: !
+
+![run](/img/intro/run.png)
+
+#### Executing Listener Commands
+
+Listening commands, i.e. commands that do not exit immediately after execution, such as `watch`, `stack`, etc., which never exit voluntarily without specifying `-n`.
+
+:::tip
+
+You cannot execute the next command until the previous command has finished executing.
+
+:::
+
+To exit such commands, you need to manually stop them by clicking on the progress bar in the bottom-right corner:
+
+![stop](/img/intro/stop.png)
+
+### Exit
+
+The Arthas process can be shut down by clicking the stop button on the toolbar or in the terminal.
+
+## Feedback
+
+If you encounter any problems while using Arthas, please submit them to [Github](https://github.com/vudsen/arthas-ui/issues).

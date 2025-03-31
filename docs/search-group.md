@@ -1,5 +1,5 @@
 ---
-sidebar_position: 1
+sidebar_position: 5
 ---
 
 # About Search Group
@@ -15,6 +15,10 @@ addLocal(#result.{ #this.split(' ') })
 ```
 
 This script will find all JVMs whose command line args contain `com.intellij.idea.Main` and add them to the search result.
+
+## Use helper functions
+
+Ognl is too complex to use, so we provide some helper functions to help you write the script.
 
 ## Create A Search Group
 

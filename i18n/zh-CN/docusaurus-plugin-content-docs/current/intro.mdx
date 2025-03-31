@@ -1,0 +1,127 @@
+---
+sidebar_position: 1
+---
+
+# 介绍
+
+Arthas-UI 是一款 IDEA 插件，它能够让你在 IDEA 直接 Attach 到 JVM 中，并执行相关的命令。
+
+特性:
+
+- 📖: 支持自定义 Ognl 脚本来过滤 JVM，不再需要自己找 PID
+- 📦: 自动复制 Jdk 和 Arthas 到容器中
+- 🖊: 每条命令的执行结果将会被单独记录，支持清屏，查看历史记录
+- 🔎: 支持 Arthas 命令的自动补全以及语法检查 ( *不稳定，仍在改进中* )
+- 💡: 支持点击 Arthas 的输出跳转到对应的代码
+
+## 快速开始
+
+### 安装
+
+<iframe width="245px" height="48px" src="https://plugins.jetbrains.com/embeddable/install/26846"></iframe>
+
+### 设置
+
+首先你需要创建一个宿主机:
+
+- 打开 `Settings` -> `Tools` -> `Arthas UI`，点击 `Host Machines` 列表的 `+` 号来创建一个宿主机:
+
+![create-hostmachine](/img/intro/create-hostmachine.png)
+
+点击后会弹出另外一个配置对话框:
+
+![hostmachine-config](/img/intro/hostmachine-config.png)
+
+在这里，我们选择，`Connect type` 为 `Local`，并在 `Provider Config` 中打开 `Local` 的选项, 然后提供相关的路径参数。
+
+---
+
+在一个宿主机中两个重要属性: `Connect Config` 和 `Provider Config`, 他们是 `1:n` 的关系，也就是一个 `Connect Config` 可以对应多个 `Provider Config`。
+
+![hostmachine-relation](/img/intro/hostmachine-relation.png)
+
+- `Connect Config`: 决定你如何连接到对应的宿主机。
+- `Provider Config`: 决定你在宿主机的哪些地方搜索 JVM。
+
+
+
+
+:::tip
+
+理论上可以使用任意版本的 Arthas 和 Jdk，只需要保证它们之间是兼容的即可！
+
+:::
+
+### 连接到 JVM
+
+当添加完成后，点击工具栏右侧的 `Arhtas` 图标来展开我们的核心组件：
+
+![toolwindow](/img/intro/toolwindow.png)
+
+**双击** `Local JVM` 或者**单击任意节点后再点击上方工具栏的刷新按钮**，会列出当前本地的所有 JVM。
+这里我们用 Arthas 官方的 `math-game.jar` 为例，在 Arthas Home 中，使用 `java -jar math-game.jar` 运行 `math-game`。
+
+在启动 `math-game`，点击刷新按钮，刷新所有的 JVM，然后找到 `math-game.jar`(上图中的 `6608 .\math-game.jar`)，双击。
+
+### 执行命令
+
+双击之后，会打开一个文件，在这个文件中，你可以直接输入 Arthas 的命令:
+
+![queryconsole](/img/intro/query_console.png)
+
+有下面几点值得注意:
+
+- 每条命令都需要以 `;` 结尾
+- 我们提供了语法检查，如果命令存在问题，IDE 将会给出错误提示
+- 即使 IDE 给出了错误，你仍然可以执行命令。我们对实际的执行并没有任何限制，即使命令确实是错误的
+
+:::note
+
+为什么使用分号结尾?
+
+1. 让命令之间的分割更加明显
+2. 实现简单，不需要复杂的语法解析
+3. 可以避免歧义: 例如 `sm` 命令可以选择性的提供方法名称，那么对于 `sm MyClass echo -d` 这条命令，
+它到底是一个 `sm` 命令，还是一条 `sm` 命令加上一条 `echo` 命令呢?
+
+~~当然不排除作者实在太菜了，不会写语法解析器这个原因。~~
+:::
+
+**选中你想要执行的命令，点击左上角绿色按钮运行按钮来执行**。在点击后将会开始创建连接，并 Attach 到 JVM 中来执行你的命令。
+
+当你选中一条命令并且想要执行时，我们会获取你选中的字符串，然后:
+
+1. 移除命令左右的空格
+2. 将所有换行替换为空格
+3. 移除命令结尾的分号(如果有)
+4. 执行命令
+
+**也就是说你可以把一条命令分成多行后再执行。**
+
+
+
+命令运行后将会打开一个终端，显示运行的结果:
+
+![run](/img/intro/run.png)
+
+#### 执行监听式命令
+
+监听式命令，即命令执行后不会立即退出，例如 `watch`、`stack` 等命令，它们在没有指定 `-n` 的情况下永远不会主动退出。
+
+:::tip
+
+在上一条命令执行完成之前，你无法执行下一条命令。
+
+:::
+
+要想退出此类命令，你需要点击右下角的进度条来手动停止:
+
+![stop](/img/intro/stop.png)
+
+### 退出
+
+点击工具栏或者终端的停止按钮就可以关闭 Arthas 进程。
+
+## 问题反馈
+
+若在使用中碰到任何问题，请提交至 [Github](https://github.com/vudsen/arthas-ui/issues)。

@@ -5,7 +5,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'My Site',
+  title: 'Arthas UI',
   tagline: 'Dinosaurs are cool',
   favicon: 'img/favicon.ico',
 
@@ -68,9 +68,9 @@ const config: Config = {
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
-      title: 'My Site',
+      title: 'Arthas UI',
       logo: {
-        alt: 'My Site Logo',
+        alt: 'Arthas UI Logo',
         src: 'img/logo.svg',
       },
       items: [
@@ -82,7 +82,7 @@ const config: Config = {
         },
         {to: '/blog', label: 'Blog', position: 'left'},
         {
-          href: 'https://github.com/facebook/docusaurus',
+          href: 'https://github.com/vudsen/arthas-ui',
           label: 'GitHub',
           position: 'right',
         },
@@ -101,23 +101,6 @@ const config: Config = {
             {
               label: 'Tutorial',
               to: '/docs/intro',
-            },
-          ],
-        },
-        {
-          title: 'Community',
-          items: [
-            {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-            },
-            {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
-            },
-            {
-              label: 'X',
-              href: 'https://x.com/docusaurus',
             },
           ],
         },

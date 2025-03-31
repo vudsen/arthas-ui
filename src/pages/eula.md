@@ -13,7 +13,7 @@ By installing, copying, or otherwise using the Plugin, you agree to be bound by 
 
    The User may not:
 
-   Modify, reverse engineer, decompile, or disassemble the Plugin.
+   Decompile and modify the Plugin.
    Distribute, sell, lease, or sublicense the Plugin without prior written consent from the Licensor.
    Use the Plugin for any unlawful or unauthorized purpose.
 
@@ -38,7 +38,12 @@ By installing, copying, or otherwise using the Plugin, you agree to be bound by 
 
    This Agreement shall be governed by and construed in accordance with the laws of CN.
 
-8. Contact Information
+8. Use Custom Search Group
+
+   The Plugin allows you using Ognl to create custom search group. Before you using the script from the internet, please make sure you understand the script and the risk of using it.
+   The script can execute any script on the host machine, it my cause some security risks. The Licensor is not responsible for any damage caused by the script.
+
+9. Contact Information
 
    For any questions about this Agreement, please contact [xu2237803016@outlook.com](mailto:xu2237803016@outlook.com)
 

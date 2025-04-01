@@ -2,9 +2,9 @@
 sidebar_position: 3
 ---
 
-## Execute the command
+# Command Execution
 
-## Refresh the JVM
+## Find the JVM
 
 Once the host has been added, click on the `Arhtas` icon on the right side of the toolbar to expand our core components:
 

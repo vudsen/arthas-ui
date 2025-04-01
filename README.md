@@ -1,41 +1,17 @@
-# Website
+# Arthas UI
 
-This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
+An IDEA plugin for Arthas, which allows you to attach to JVM and execute commands directly in IDEA.
 
-### Installation
 
-```
-$ yarn
-```
+Features.
 
-### Local Development
+- 📖: Supports custom Ognl scripts to filter JVMs, no need to find PIDs yourself!
+- 📦: Automatically copy Jdk and Arthas to containers.
+- 🖊: The result of each command will be recorded separately, support clear screen, view history
+- 🔎: Support auto-completion and syntax checking of Arthas commands ( *unstable, still working on it* )
+- 💡: support clicking Arthas output to jump to the corresponding code.
 
-```
-$ yarn start
-```
+Links:
 
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
-
-### Build
-
-```
-$ yarn build
-```
-
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
-
-### Deployment
-
-Using SSH:
-
-```
-$ USE_SSH=true yarn deploy
-```
-
-Not using SSH:
-
-```
-$ GIT_USER=<Your GitHub username> yarn deploy
-```
-
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+- [Download](https://plugins.jetbrains.com/plugin/26846-arthas-ui)
+- [Documentation](https://arthas-ui.pages.dev/)

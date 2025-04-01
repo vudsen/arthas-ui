@@ -6,11 +6,11 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'Arthas UI',
-  tagline: 'Dinosaurs are cool',
+  tagline: 'Make a better debug experience.',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://your-docusaurus-site.example.com',
+  url: 'https://arthas-ui.pages.dev/',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
@@ -82,6 +82,7 @@ const config: Config = {
         },
         {to: '/blog', label: 'Blog', position: 'left'},
         {href: 'https://arthas-ui-api.pages.dev/', label: 'API', position: 'left'},
+        {href: 'https://plugins.jetbrains.com/plugin/26846-arthas-ui', label: 'Download', position: 'right'},
         {
           href: 'https://github.com/vudsen/arthas-ui',
           label: 'GitHub',

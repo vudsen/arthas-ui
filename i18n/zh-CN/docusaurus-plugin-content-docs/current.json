@@ -3,8 +3,12 @@
     "message": "Next",
     "description": "The label for version current"
   },
-  "sidebar.tutorialSidebar.category.Tutorial": {
+  "sidebar.tutorialSidebar.category.Feature": {
+    "message": "特性",
+    "description": "The label for category Feature in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Getting Started": {
     "message": "入门",
-    "description": "The label for category Tutorial in sidebar tutorialSidebar"
+    "description": "The label for category Getting Started in sidebar tutorialSidebar"
   }
 }

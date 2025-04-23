@@ -9,3 +9,8 @@
   height: 200px;
   width: 200px;
 }
+
+.featuresRow {
+  display: flex;
+  justify-content: space-around;
+}

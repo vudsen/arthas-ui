@@ -1,0 +1,57 @@
+---
+sidebar_position: 2
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# 配置
+
+:::warning
+
+随着插件更新，部分图片可能和最新版本不符，但是文档中会保证整个的流程都是一样的。
+
+:::
+
+## 添加宿主机
+
+在安装完成后，你需要创建一个宿主机:
+
+- 打开 `Settings` -> `Tools` -> `Arthas UI`，点击 `Host Machines` 列表的 `+` 号来创建一个宿主机:
+
+![create-hostmachine](/img/intro/create-hostmachine.png)
+
+点击后会弹出另外一个配置对话框:
+
+![hostmachine-config](/img/intro/new-host-machine-step1.png)
+
+- `Name`: 宿主机名称。
+- `Connect type`: 连接方式，目前支持本地和 SSH 连接。
+
+:::danger
+
+当 `Connect type` 为 SSH 时，**仅支持连接到 Linux 机器**，不支持 Windows 或者 MacOS。
+
+:::
+
+当配置完成后点击下一步，插件将会进行简单的探活，然后搜索宿主机上可用的工具链:
+
+![toolchain-config](/img/intro/toolchain-config.png)
+
+- `Data directory`: 数据目录，我们会自动下载 `arthas` 和 `jattach` 到该目录，不需要你提前准备。默认目录为 `/opt/arthas-ui`
+
+在图中的 Tab 面板，它决定了插件在哪里搜索 JVM:
+
+<Tabs>
+  <TabItem value="Local" default>
+    搜素宿主机本地的 JVM
+
+    - `Java home`: Java 目录，支持 jre。
+  </TabItem>
+  <TabItem value="Docker">
+    搜索 Docker 容器中的 JVM
+
+    - `Java home`: 容器中的 Java 目录，支持 jre，可以为空。
+  </TabItem>
+</Tabs>
+
+在填写完所有必要的参数后，点击右下角 `Create` 创建宿主机。

@@ -1,0 +1,58 @@
+---
+sidebar_position: 2
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Configuration
+
+:::warning
+
+As the plugin is updated, some of the images may not match the latest version, but the documentation ensures that the process is the same throughout.
+
+:::
+
+## Add A Host Machine
+
+After the installation is complete, you need to create a host machine:
+
+- Open `Settings` -> `Tools` -> `Arthas UI` and click on the `+` sign in the `Host Machines` list to create a host:
+
+![create-hostmachine](/img/intro/create-hostmachine.png)
+
+Clicking on this will bring up another configuration dialog:
+
+![hostmachine-config](/img/intro/new-host-machine-step1.png)
+
+- `Name`: Name of the host.
+- `Connect type`: connection type, currently supports local and SSH connections.
+
+:::danger
+
+When `Connect type` is SSH, **only Linux is supported**, Windows and macOS is not supported!
+
+:::
+
+When the configuration is complete, and click the Next, the plugin will do a simple probe and search the toolchain available on the host machine:
+
+![toolchain-config](/img/intro/toolchain-config.png)
+
+- `Data directory`: the data directory, we will automatically download `arthas` and `jattach` to this directory,
+you don't need to prepare it in advance. The default directory is `/opt/arthas-ui`.
+
+In the Tab panel of the image, it determines where the plugin searches the JVM:
+
+<Tabs>
+  <TabItem value="Local" default>
+  Search for the host's local JVM
+
+  - `Java home`: Java directory, supports jre.
+  </TabItem>
+  <TabItem value="Docker">
+  Search for JVMs in Docker containers
+
+  - `Java home`: Java directory in the container, supports jre, can be empty.
+  </TabItem>
+</Tabs>
+
+After filling in all the necessary parameters, click `Create` in the bottom right corner to create the host.

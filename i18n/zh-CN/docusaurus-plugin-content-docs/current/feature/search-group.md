@@ -11,9 +11,8 @@ sidebar_position: 1
 例如你可以使用下面的脚本来搜索所有命令行参数中有 `com.intellij.idea.Main` 的 JVM:
 
 ```ognl
-#resultStr = hostMachine.execute('jps', '-lvm').ok(),
-#result = #resultStr.split('\n').{? #this.contains('com.intellij.idea.Main')},
-addLocal(#result.{ #this.split(' ') })
+#result = helpers.local().findByCommandLineArgs('com.intellij.idea.Main', 'IDEA Main'),
+addAll(#result)
 ```
 
 ## 创建一个搜索组
@@ -34,19 +33,18 @@ addLocal(#result.{ #this.split(' ') })
 
 ## 使用内置函数
 
-[Ognl](https://commons.apache.org/dormant/commons-ognl/language-guide.html) 太复杂了！有没有更简单的方法? 
+除了开头提到的函数外，我们还有许多其它的内置方法，请查阅我的 [API 文档](https://arthas-ui-api.pages.dev/)。
 
----
+你可以从 [MyOgnlContext](https://arthas-ui-api.pages.dev/-arthas%20-u-i/io.github.vudsen.arthasui.script/-my-ognl-context/)
+开始，它是整个 OGNL 的上下文，你可以直接使用其中的方法和字段。
 
-有的！我们提供了一些内置函数来帮助你编写脚本，例如上面的脚本可以简化为:
+在[这里](https://arthas-ui-api.pages.dev/-arthas%20-u-i/io.github.vudsen.arthasui.script.helper/-local-jvm-search-helper/)可以看到 `helper.local()`
+中可以使用的所有方法，例如你可以使用 `findByPort` 方法来根据端口搜索:
 
 ```ognl
-addAll(helpers.local().findByCommandLineArgs('com.intellij.idea.Main', 'IDEA'))
+#result = helpers.local().findByPort(8080, 'My App'),
+addAll(#result)
 ```
-
-这个脚本将会获取所有命令行参数中有 `com.intellij.idea.Main` 的 jvm 并将其名称设置为 `IDEA`。
-
-关于 Ognl 所有可用的上下文，可以参考[这里](https://arthas-ui-api.pages.dev/-arthas%20-u-i/io.github.vudsen.arthasui.script/-my-ognl-context/)。
 
 ## 下一步
 

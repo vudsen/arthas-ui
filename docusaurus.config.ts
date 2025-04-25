@@ -40,7 +40,7 @@ const config: Config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/vudsen/arthas-ui/tree/master',
         },
         theme: {
           customCss: './src/css/custom.css',
@@ -68,7 +68,7 @@ const config: Config = {
         {href: 'https://arthas-ui-api.pages.dev/', label: 'API', position: 'left'},
         {href: 'https://plugins.jetbrains.com/plugin/26846-arthas-ui', label: 'Download', position: 'right'},
         {
-          href: 'https://github.com/vudsen/arthas-ui',
+          href: 'https://github.com/vudsen/arthas-ui-source',
           label: 'GitHub',
           position: 'right',
         },
@@ -95,11 +95,11 @@ const config: Config = {
           items: [
             {
               label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
+              href: 'https://github.com/vudsen/arthas-ui-source',
             },
             {
-              label: 'EULA',
-              href: '/eula'
+              label: 'Doc Github',
+              href: 'https://github.com/vudsen/arthas-ui'
             }
           ],
         },

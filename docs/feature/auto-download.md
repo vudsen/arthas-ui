@@ -2,37 +2,39 @@
 sidebar_position: 2
 ---
 
-# Automatic Download
+# Offline Installation Toolchain
 
-Our plugin supports automatic download of toolchains. 
-And by default downloads `Arthas` and `Jattach` from GitHub and places them in the `Data Directory` specified in the configuration.
+The plugin supports automatic download of the toolchain, which is then placed in the `Data Directory` specified in the configuration. The default download source is:
+- `Arthas` and `Jattach`: GitHub Releases
+- `Kubectl`: Google CDN
 
-In some cases, the automatic downloads will not work due to poor host network conditions or network restrictions, so here are some alternatives.
+In some cases, automatic downloads may not be available due to poor host machine network conditions or inability to access the internet. Alternative solutions are provided below.
 
 
 ## Local Upload
 
-Plugin supports uploading local packages to the remote host machine, 
-the toolchain will be downloaded on local and then upload them to the corresponding host machine.
+The plugin supports uploading local packages to the host machine. The toolchain will prioritize local downloads and then upload them to the corresponding host machine.
 
-To enable the local upload, you need to create a local host machine. After that you can enable local transfer by selecting it among other hosts:
+To use local upload, you need to create a local host machine. Then select it on other host machines to enable local transmission:
 
 ![config the local source](/img/feature/trans-pkg.png)
 
+## Tools required for manual download
 
-## Manual Downloads
+Even with the local upload feature, downloads may still fail locally in some cases, but the upload feature remains available.
+Therefore, you can prepare the required packages locally in advance and upload them directly.
 
-You can manually download and install the toolchain from GitHub to your host machine:
+The tools used are:
 
-- [Arthas](https://github.com/alibaba/arthas/releases/latest)
-- [Jattach](https://github.com/jattach/jattach/releases/latest)
+- [arthas](https://github.com/alibaba/arthas/releases): `arthas-bin.zip`
+- [jattach](https://github.com/jattach/jattach/releases): `jattach-{arch}.tar.gz`
+- [pzip](https://github.com/ybirader/pzip/releases): `punzip_Linux_{arch}.tar.gz`
+- [kubectl](https://kubernetes.io/docs/tasks/tools/):
+    - Windows: `kubectl.exe`
+    - Linux: `kubectl-linux`
+    - Linux (ARM): `kubectl-linux-arm`
+    - macOS: `kubectl-darwin`
 
-After that, put the tarball directly into the configured `<Data Directory>`, and the plugin will automatically detect and use it.
+Regarding `kubectl`, you need to specify the version in the settings; otherwise, it will call the interface to query the latest version.
 
-### Unzip Manually
-
-Even if you download the toolchain manually, the plugin still accesses the GitHub API to get the latest Release information, just on the client side (the side that uses the IDE).
-
-If you don't have access to GitHub even on your own machine, you can manually extract the toolchain package to ` <Data Directory>/pkg/<Name>` for the full manual installation process.
-
-- The `<Name>` options are `arthas` or `jattach`, you can extract the contents of the package directly into them.
+Then, simply place the compressed package in the configured `<Data Directory>/downloads` directory, and the plugin will automatically detect and use it.
